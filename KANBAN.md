@@ -6,13 +6,14 @@ title: payplan-website
 ---
 kanban
   Backlog
-    Phase 1 Foundation["Phase 1: Foundation (Week 1-2)"]
-    Phase 2 Templates["Phase 2: Page Templates (Week 3-5)"]
-    Phase 3 Content["Phase 3: Content Migration (Week 5-7)"]
-    Phase 4 Integration["Phase 4: Integration (Week 7-8)"]
-    Phase 5 Guide["Phase 5: Marketing Guide (Week 8-9)"]
-    Phase 6 Launch["Phase 6: QA and Launch (Week 9-10)"]
+    Phase 3 Content["Phase 3: Content Migration"]
+    Phase 4 Integration["Phase 4: Integration"]
+    Phase 5 Guide["Phase 5: Marketing Guide"]
+    Phase 6 Launch["Phase 6: QA and Launch"]
   Todo
+    Visual polish["Visual polish: homepage + DMP solution page to production quality"]
+    SEO audit["SEO audit: export rankings, Core Web Vitals baseline"]
+    URL redirect map["URL redirect map: 330 current URLs → new URLs"]
   In Progress
   Review
   Done
@@ -26,76 +27,100 @@ kanban
     Layout components["Header, Footer, TrustBar components"]
     Coolify deploy["Deploy to Coolify at payplan.tjb.app"]
     CI pipeline["Build on push, deploy main to Coolify"]
+    Homepage["Homepage: hero + segmentation + three-step + solutions + testimonials"]
+    Solution page["Solution page: breadcrumb + at-a-glance + eligibility + comparison + FAQ"]
+    Where Do I Start["Where Do I Start: permission hero + reassurance + tools"]
+    About page["About: trust badges + how-can-it-be-free explainer"]
+    Partner landing["Partner landing: co-branded + form + FAQs (no nav)"]
+    Paid-media landing["Paid-media landing: form-first + noindex (no nav)"]
+    Self-serve assessment["Check Your Options: multi-step interactive assessment"]
+    Life After Debt["Life After Debt: wellbeing tools + newsletter"]
+    Your Plan placeholder["Your Plan: placeholder for Core squad micro-frontend"]
+    Sanity Studio route["Sanity Studio embedded at /studio"]
+    Content seed["Sanity seeded: 4 solutions, 3 testimonials, 3 FAQs, site settings"]
+    CMS wiring["All pages fetch content from Sanity CMS"]
 ```
 
 ## Task Details
 
-### Phase 1: Foundation
+### Phase 1: Foundation — COMPLETE
 
-| Task | Description | Status |
-|---|---|---|
-| Monorepo setup | Turborepo with apps/web, apps/studio, packages/design-tokens | Done |
-| Next.js scaffold | Next.js 15 with App Router, TypeScript strict, Tailwind v4 | Done |
-| Design tokens package | All brand framework tokens as Tailwind preset + CSS custom properties | Done |
-| Sanity project setup | Sanity Studio with schemas, config, build passing | Done |
-| Core schemas | siteSettings, solution, testimonial, faqItem content types | Done |
-| Layout components | Header, Footer, TrustBar matching wireframe specs | Done |
-| Coolify deploy | Initial deployment to payplan.tjb.app via Coolify | Done |
-| CI pipeline | Build on push, deploy main to Coolify | Done |
+| Task | Status |
+|---|---|
+| Monorepo setup (Turborepo, apps/web, apps/studio, packages/design-tokens) | Done |
+| Next.js 15 scaffold (App Router, TypeScript strict, Tailwind v4) | Done |
+| Design tokens package (Tailwind preset + CSS vars + TS constants) | Done |
+| Sanity project setup (project 0w7asqgt, Studio config) | Done |
+| Core schemas (siteSettings, solution, testimonial, faqItem) | Done |
+| Layout components (Header, Footer, TrustBar) | Done |
+| Coolify deploy (payplan.tjb.app, Dockerfile, standalone output) | Done |
+| CI pipeline (auto-deploy on push to main) | Done |
 
-### Phase 2: Page Templates
+### Phase 2: Page Templates — COMPLETE
 
-| Task | Description | Status |
-|---|---|---|
-| Homepage | Hero + segmentation grid + three-step + solutions grid + testimonials | Todo |
-| Solution page | Breadcrumb + at-a-glance + eligibility + comparison + FAQ accordion | Todo |
-| Where Do I Start | Permission-led hero + reassurance + tools + solutions grid | Todo |
-| About page | Trust badges + "how can it be free" + Debt Diaries video | Todo |
-| Partner landing | Co-branded header + form + partner FAQs (no main nav) | Todo |
-| Paid-media landing | No nav + form + trust badges (noindex) | Todo |
-| Self-serve assessment | Multi-step form + results + recommendations | Todo |
-| Life After Debt | Wellbeing tools + newsletter signup | Todo |
+| Task | Status |
+|---|---|
+| Homepage (HeroHome, TrustBar, SegmentationGrid, ThreeStepProcess, TestimonialBlock, SolutionGrid) | Done |
+| Solution page (HeroSolution, AtAGlance, EligibilityCheck, ComparisonTable, FaqAccordion) | Done |
+| Where Do I Start (HeroPermission, reassurance scenarios, tools) | Done |
+| About page (trust badges, "how can it be free", protections) | Done |
+| Partner landing page (co-branded header, form, partner FAQs, no nav) | Done |
+| Paid-media landing page (form-first, noindex, no nav) | Done |
+| Self-serve assessment (Check Your Options, 4-step interactive) | Done |
+| Life After Debt (wellbeing tools, confidence areas, newsletter) | Done |
+| Your Plan placeholder (for Core squad micro-frontend) | Done |
+| Sanity Studio embedded at /studio | Done |
+| Sanity content seeded (4 solutions, 3 testimonials, 3 FAQs, site settings) | Done |
+| All pages wired to Sanity CMS (GROQ queries, Portable Text rendering) | Done |
+
+### Phase 2.5: Visual Polish — NEXT
+
+| Task | Status |
+|---|---|
+| Homepage to production quality (typography, spacing, imagery, brand feel) | Todo |
+| DMP solution page to production quality | Todo |
+| Remaining pages visual pass | Todo |
 
 ### Phase 3: Content Migration
 
-| Task | Description | Status |
-|---|---|---|
-| SEO audit | Export rankings, Core Web Vitals baseline | Todo |
-| URL redirect map | 330 current URLs → new URLs mapping | Todo |
-| Solution content | Migrate all solution pages to Sanity | Todo |
-| Debt info articles | Migrate information articles to Sanity | Todo |
-| About/contact | Migrate company pages | Todo |
-| Blog posts | Migrate news articles | Todo |
-| Structured data | JSON-LD on all pages | Todo |
-| Sitemap + robots | Auto-generated XML sitemap, robots.txt | Todo |
+| Task | Status |
+|---|---|
+| SEO audit (export rankings, Core Web Vitals baseline) | Todo |
+| URL redirect map (330 current URLs → new URLs) | Todo |
+| Solution content (migrate all solution pages to Sanity) | Todo |
+| Debt info articles (migrate information articles) | Todo |
+| About/contact pages | Todo |
+| Blog posts (migrate news articles) | Todo |
+| Structured data (JSON-LD on all pages) | Todo |
+| Sitemap + robots.txt | Todo |
 
 ### Phase 4: Integration
 
-| Task | Description | Status |
-|---|---|---|
-| Intercom | Load, referral ID handoff, Live Chat trigger | Todo |
-| GTM/GA | dataLayer, event tracking continuity | Todo |
-| Trustpilot | Widget integration | Todo |
-| Module Federation | Setup for squad micro-frontends | Todo |
-| Referral ID system | Middleware, cookies, dataLayer push | Todo |
+| Task | Status |
+|---|---|
+| Intercom (load, referral ID handoff, Live Chat trigger) | Todo |
+| GTM/GA (dataLayer, event tracking continuity) | Todo |
+| Trustpilot widget integration | Todo |
+| Module Federation (setup for squad micro-frontends) | Todo |
+| Referral ID system (middleware, cookies, dataLayer push) | Todo |
 
 ### Phase 5: Marketing Guide
 
-| Task | Description | Status |
-|---|---|---|
-| VitePress setup | docs/ site with brand framework nav | Todo |
-| Content update guide | Creating pages, editing, publishing workflows | Todo |
-| Template documentation | What each template does, when to use it | Todo |
-| Sanity Studio guide | UI walkthrough for marketing team | Todo |
+| Task | Status |
+|---|---|
+| VitePress setup (docs/ site with brand framework nav) | Todo |
+| Content update guide (creating pages, editing, publishing) | Todo |
+| Template documentation (what each template does) | Todo |
+| Sanity Studio guide (UI walkthrough for marketing team) | Todo |
 
 ### Phase 6: QA and Launch
 
-| Task | Description | Status |
-|---|---|---|
-| Cross-browser testing | Chrome, Safari, Firefox, Edge | Todo |
-| Mobile responsive | All breakpoints verified | Todo |
-| Accessibility audit | WCAG AA compliance | Todo |
-| Performance audit | Core Web Vitals targets met | Todo |
-| Redirect verification | All 330 URLs tested | Todo |
-| Staging review | Marketing team sign-off | Todo |
-| DNS cutover | Plan and execute domain switch | Todo |
+| Task | Status |
+|---|---|
+| Cross-browser testing | Todo |
+| Mobile responsive (all breakpoints) | Todo |
+| Accessibility audit (WCAG AA) | Todo |
+| Performance audit (Core Web Vitals targets) | Todo |
+| Redirect verification (all 330 URLs) | Todo |
+| Staging review (marketing team sign-off) | Todo |
+| DNS cutover | Todo |

@@ -21,15 +21,22 @@ const steps = [
 
 export function ThreeStepProcess() {
   return (
-    <section className="bg-pp-cream-warm py-16 md:py-24">
+    <section className="bg-pp-cream-warm py-20 md:py-28">
       <div className="mx-auto max-w-[var(--container-readable)] px-6">
         <h2 className="pp-h-section text-pp-deep">How it works</h2>
-        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3">
-          {steps.map((step) => (
-            <div key={step.number}>
-              <span className="pp-h-display text-pp-accent/20">{step.number}</span>
-              <h3 className="pp-h-sub mt-2 text-pp-deep">{step.title}</h3>
-              <p className="mt-3 text-sm text-pp-ink/70">{step.description}</p>
+        <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+          {steps.map((step, i) => (
+            <div key={step.number} className="relative">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-pp-accent/10 text-pp-accent font-semibold text-xl">
+                {step.number}
+              </div>
+              <h3 className="pp-h-sub mt-5 text-pp-deep">{step.title}</h3>
+              <p className="mt-3 text-sm text-pp-ink/60 leading-relaxed">{step.description}</p>
+              {i < steps.length - 1 && (
+                <div className="hidden md:block absolute top-7 left-[calc(100%-8px)] w-[calc(100%-48px)]">
+                  <div className="h-px bg-pp-line" />
+                </div>
+              )}
             </div>
           ))}
         </div>
