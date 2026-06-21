@@ -14,6 +14,7 @@ const columns = [
     links: [
       { label: 'Life after debt', href: '/life-after-debt' },
       { label: 'Guides and advice', href: '/debt-info' },
+      { label: 'Latest news', href: '/news' },
       { label: 'Your plan', href: '/your-plan' },
     ],
   },
