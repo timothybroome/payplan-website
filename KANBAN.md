@@ -13,7 +13,6 @@ kanban
     Phase 5 Guide["Phase 5: Marketing Guide (Week 8-9)"]
     Phase 6 Launch["Phase 6: QA and Launch (Week 9-10)"]
   Todo
-    CI pipeline["Build on push, deploy main to Coolify"]
   In Progress
   Review
   Done
@@ -26,6 +25,7 @@ kanban
     Core schemas["Sanity schemas: siteSettings, solution, testimonial, faqItem"]
     Layout components["Header, Footer, TrustBar components"]
     Coolify deploy["Deploy to Coolify at payplan.tjb.app"]
+    CI pipeline["Build on push, deploy main to Coolify"]
 ```
 
 ## Task Details
@@ -41,7 +41,7 @@ kanban
 | Core schemas | siteSettings, solution, testimonial, faqItem content types | Done |
 | Layout components | Header, Footer, TrustBar matching wireframe specs | Done |
 | Coolify deploy | Initial deployment to payplan.tjb.app via Coolify | Done |
-| CI pipeline | Build on push, deploy main to Coolify | Todo |
+| CI pipeline | Build on push, deploy main to Coolify | Done |
 
 ### Phase 2: Page Templates
 

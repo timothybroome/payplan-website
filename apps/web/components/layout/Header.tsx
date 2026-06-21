@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 const navItems = [
   { label: 'Where do I start?', href: '/where-do-i-start' },
-  { label: 'Debt solutions', href: '/debt-solutions' },
-  { label: 'Guides & advice', href: '/debt-info' },
-  { label: 'About us', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Ways to clear your debt', href: '/debt-solutions' },
+  { label: 'Life after debt', href: '/life-after-debt' },
+  { label: 'About', href: '/about' },
+  { label: 'Your plan', href: '/your-plan' },
 ];
 
 export function Header() {
