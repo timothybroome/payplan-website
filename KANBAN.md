@@ -81,18 +81,24 @@ kanban
 | DMP solution page to production quality | Done |
 | All shared components polished (Header, Footer, TrustBar, cards, tables, accordion) | Done |
 
-### Phase 3: Content Migration
+### Phase 3: Content Migration — IN PROGRESS
 
 | Task | Status |
 |---|---|
+| URL redirect map (130+ rules, DMP/IVA/Bankruptcy/DRO sub-pages consolidated) | Done |
+| Redirect middleware (next.config.ts redirects) | Done |
+| Article schema + routes (/debt-info, /debt-info/[slug]) | Done |
+| Blog post schema + routes (/news, /news/[slug]) | Done |
+| GROQ queries (articles, blog posts, slugs) | Done |
+| Structured data — Organization JSON-LD on all pages | Done |
+| Structured data — BreadcrumbSchema + FaqSchema components | Done |
+| Sitemap (auto-generated from Sanity content) | Done |
+| robots.txt (blocks /studio, /your-plan, /api/) | Done |
 | SEO audit (export rankings, Core Web Vitals baseline) | Todo |
-| URL redirect map (330 current URLs → new URLs) | Todo |
-| Solution content (migrate all solution pages to Sanity) | Todo |
-| Debt info articles (migrate information articles) | Todo |
-| About/contact pages | Todo |
-| Blog posts (migrate news articles) | Todo |
-| Structured data (JSON-LD on all pages) | Todo |
-| Sitemap + robots.txt | Todo |
+| Solution content (migrate WordPress content into Sanity) | Todo |
+| Debt info articles (migrate ~90 articles into Sanity) | Todo |
+| Blog posts (migrate news articles into Sanity) | Todo |
+| About/contact pages (migrate company content) | Todo |
 
 ### Phase 4: Integration
 
