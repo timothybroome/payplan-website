@@ -1,0 +1,20 @@
+:root {
+  /* Brand Blues */
+  --color-deep: #035875;
+  --color-accent: #0090d1;
+
+  /* Neutrals */
+  --color-ink: #24201b;
+  --color-cream: #fbfcfd;
+  --color-cream-warm: #eef1f4;
+  --color-line: #d5dce2;
+
+  /* Internal */
+  --color-berry: #a8334d;
+
+  /* Layout */
+  --container-readable: 1180px;
+  --radius: 20px;
+  --radius-pill: 9999px;
+  --shadow-panel: -8px 12px 32px rgba(36, 32, 27, 0.07);
+}

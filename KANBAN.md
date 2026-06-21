@@ -13,18 +13,19 @@ kanban
     Phase 5 Guide["Phase 5: Marketing Guide (Week 8-9)"]
     Phase 6 Launch["Phase 6: QA and Launch (Week 9-10)"]
   Todo
-    Design tokens package["@payplan/design-tokens: Tailwind preset + CSS vars + TS constants"]
-    Sanity project setup["Sanity project + Studio initialisation"]
-    Next.js scaffold["Next.js 15 App Router + TypeScript + Tailwind"]
-    Monorepo setup["Turborepo monorepo structure"]
-    Core schemas["Sanity schemas: siteSettings, solution, testimonial, faqItem"]
-    Layout components["Header, Footer, TrustBar components"]
     Coolify deploy["Deploy to Coolify at payplan.tjb.app"]
+    CI pipeline["Build on push, deploy main to Coolify"]
   In Progress
   Review
   Done
     Source materials["Brand framework, wireframes, current site content extracted and documented"]
     Technical plan["PLAN.md: stack, CMS, architecture, phases, risks"]
+    Monorepo setup["Turborepo monorepo structure"]
+    Next.js scaffold["Next.js 15 App Router + TypeScript + Tailwind"]
+    Design tokens package["@payplan/design-tokens: Tailwind preset + CSS vars + TS constants"]
+    Sanity project setup["Sanity project + Studio initialisation"]
+    Core schemas["Sanity schemas: siteSettings, solution, testimonial, faqItem"]
+    Layout components["Header, Footer, TrustBar components"]
 ```
 
 ## Task Details
@@ -33,12 +34,12 @@ kanban
 
 | Task | Description | Status |
 |---|---|---|
-| Next.js scaffold | Next.js 15 with App Router, TypeScript strict, Tailwind v4 | Todo |
-| Monorepo setup | Turborepo with apps/web, apps/studio, packages/design-tokens | Todo |
-| Design tokens package | All brand framework tokens as Tailwind preset + CSS custom properties | Todo |
-| Sanity project setup | Create Sanity project, configure Studio, connect to Next.js | Todo |
-| Core schemas | siteSettings, solution, testimonial, faqItem content types | Todo |
-| Layout components | Header, Footer, TrustBar matching wireframe specs | Todo |
+| Monorepo setup | Turborepo with apps/web, apps/studio, packages/design-tokens | Done |
+| Next.js scaffold | Next.js 15 with App Router, TypeScript strict, Tailwind v4 | Done |
+| Design tokens package | All brand framework tokens as Tailwind preset + CSS custom properties | Done |
+| Sanity project setup | Sanity Studio with schemas, config, build passing | Done |
+| Core schemas | siteSettings, solution, testimonial, faqItem content types | Done |
+| Layout components | Header, Footer, TrustBar matching wireframe specs | Done |
 | Coolify deploy | Initial deployment to payplan.tjb.app via Coolify | Todo |
 | CI pipeline | Build on push, deploy main to Coolify | Todo |
 
