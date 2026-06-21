@@ -338,14 +338,14 @@ This preserves Roxy's MI reporting pipeline without any changes on the downstrea
 
 ---
 
-## 6. Open Questions
+## 6. Decisions (Resolved)
 
-1. **Your Plan / Client Area** — is this part of this build, or does it remain on the existing platform? The wireframes show it, but it requires authenticated access to Vulcan case data. This may be a separate micro-frontend from the Core squad.
+1. **Your Plan / Client Area** — **Micro-frontend from Core squad.** We provide a `/your-plan` route in the website as a host page, but the actual dashboard (progress metrics, plan management, authenticated Vulcan data) is a micro-frontend built and deployed by the Core squad. We load it via Module Federation with a graceful fallback.
 
-2. **Blog/News** — the current site has a blog (`post-sitemap.xml`). Should this migrate into the new CMS, or is it being retired/moved elsewhere?
+2. **Blog/News** — **Migrate into Sanity.** Blog posts become a `blogPost` content type in Sanity. Existing posts are migrated. Marketing creates and manages posts in Sanity Studio going forward.
 
-3. **Scotland-specific content** — the current site has child themes for Scotland. Should Scotland content be a separate section in the new site, or integrated with jurisdiction flags per page?
+3. **Scotland-specific content** — **Separate section.** Scotland gets its own `/scotland/` route prefix and distinct landing page. Scotland-only solutions (Trust Deed, DAS, MAP, Sequestration) are standalone pages under `/scotland/`. Shared solutions (DMP, Bankruptcy) have Scotland-specific variants where the legal framework differs.
 
-4. **Partner page creation workflow** — who creates new partner landing pages? If marketing, they'll need a simple Sanity workflow. If the partnerships team, they may need more guidance.
+4. **Partner page creation** — **Marketing team creates from template.** The `partnerLanding` Sanity schema must be simple enough for marketing to create a new partner page by filling in: partner name, logo, phone number, referral/introducer ID, FAQs, and any partner-specific copy. No developer involvement required.
 
-5. **Form submissions** — the wireframe shows forms on partner and paid-media landing pages (debt slider + contact preference). Where do these submit to? HubSpot Forms API? Direct to Intercom? The Vulcan pathway via the existing WordPress plugin?
+5. **Form submissions** — **Intercom (via Sam).** Form submissions on partner and paid-media landing pages open an Intercom conversation with the customer's data pre-loaded (debt level, contact preference, referral ID). Sam takes over from there. This aligns with the CRO initiative direction (web form removal → Sam/Intercom flow).
