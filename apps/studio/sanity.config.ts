@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'payplan',
   title: 'PayPlan',
 
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'TODO',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || '0w7asqgt',
   dataset: process.env.SANITY_STUDIO_DATASET || 'production',
 
   plugins: [structureTool(), visionTool()],
