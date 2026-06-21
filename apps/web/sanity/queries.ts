@@ -42,3 +42,57 @@ export async function getAllSolutionSlugs() {
     `*[_type == "solution"].slug.current`,
   );
 }
+
+export async function getArticles() {
+  return sanityClient.fetch(
+    `*[_type == "article"] | order(title asc) {
+      _id, title, summary, category,
+      "slug": slug.current,
+      "relatedSolutions": relatedSolutions[]->{ _id, title, shortName, "slug": slug.current }
+    }`,
+  );
+}
+
+export async function getArticle(slug: string) {
+  return sanityClient.fetch(
+    `*[_type == "article" && slug.current == $slug][0] {
+      _id, title, summary, category, body,
+      "slug": slug.current,
+      seoTitle, seoDescription,
+      "relatedSolutions": relatedSolutions[]->{ _id, title, shortName, "slug": slug.current }
+    }`,
+    { slug },
+  );
+}
+
+export async function getAllArticleSlugs() {
+  return sanityClient.fetch(
+    `*[_type == "article"].slug.current`,
+  );
+}
+
+export async function getBlogPosts() {
+  return sanityClient.fetch(
+    `*[_type == "blogPost"] | order(publishedAt desc) {
+      _id, title, summary, publishedAt,
+      "slug": slug.current
+    }`,
+  );
+}
+
+export async function getBlogPost(slug: string) {
+  return sanityClient.fetch(
+    `*[_type == "blogPost" && slug.current == $slug][0] {
+      _id, title, summary, publishedAt, body,
+      "slug": slug.current,
+      seoTitle, seoDescription
+    }`,
+    { slug },
+  );
+}
+
+export async function getAllBlogSlugs() {
+  return sanityClient.fetch(
+    `*[_type == "blogPost"].slug.current`,
+  );
+}

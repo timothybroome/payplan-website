@@ -65,6 +65,39 @@ const faqItem = defineType({
   preview: { select: { title: 'question' } },
 });
 
+const article = defineType({
+  name: 'article',
+  title: 'Article',
+  type: 'document',
+  fields: [
+    defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+    defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title', maxLength: 96 }, validation: (r) => r.required() }),
+    defineField({ name: 'summary', title: 'Summary', type: 'text', rows: 3 }),
+    defineField({ name: 'category', title: 'Category', type: 'string', options: { list: [{ title: 'Debt Info', value: 'debt-info' }, { title: 'Advice', value: 'advice' }, { title: 'Guides', value: 'guides' }] }, initialValue: 'debt-info' }),
+    defineField({ name: 'relatedSolutions', title: 'Related Solutions', type: 'array', of: [{ type: 'reference', to: [{ type: 'solution' }] }] }),
+    defineField({ name: 'body', title: 'Body Content', type: 'array', of: [{ type: 'block' }] }),
+    defineField({ name: 'seoTitle', title: 'SEO Title', type: 'string' }),
+    defineField({ name: 'seoDescription', title: 'SEO Description', type: 'text', rows: 3 }),
+  ],
+  preview: { select: { title: 'title', subtitle: 'category' } },
+});
+
+const blogPost = defineType({
+  name: 'blogPost',
+  title: 'Blog Post',
+  type: 'document',
+  fields: [
+    defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+    defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title', maxLength: 96 }, validation: (r) => r.required() }),
+    defineField({ name: 'publishedAt', title: 'Published Date', type: 'datetime', validation: (r) => r.required() }),
+    defineField({ name: 'summary', title: 'Summary', type: 'text', rows: 3 }),
+    defineField({ name: 'body', title: 'Body Content', type: 'array', of: [{ type: 'block' }] }),
+    defineField({ name: 'seoTitle', title: 'SEO Title', type: 'string' }),
+    defineField({ name: 'seoDescription', title: 'SEO Description', type: 'text', rows: 3 }),
+  ],
+  preview: { select: { title: 'title', subtitle: 'publishedAt' }, prepare: ({ title, subtitle }) => ({ title, subtitle: subtitle ? new Date(subtitle).toLocaleDateString('en-GB') : '' }) },
+});
+
 export default defineConfig({
   name: 'payplan',
   title: 'PayPlan',
@@ -73,6 +106,6 @@ export default defineConfig({
   basePath: '/studio',
   plugins: [structureTool()],
   schema: {
-    types: [siteSettings, solution, testimonial, faqItem],
+    types: [siteSettings, solution, testimonial, faqItem, article, blogPost],
   },
 });

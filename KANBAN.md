@@ -11,10 +11,8 @@ kanban
     Phase 5 Guide["Phase 5: Marketing Guide"]
     Phase 6 Launch["Phase 6: QA and Launch"]
   Todo
-    Visual polish["Visual polish: homepage + DMP solution page to production quality"]
-    SEO audit["SEO audit: export rankings, Core Web Vitals baseline"]
-    URL redirect map["URL redirect map: 330 current URLs → new URLs"]
   In Progress
+    Phase 3 Content["Phase 3: Content Migration"]
   Review
   Done
     Source materials["Brand framework, wireframes, current site content extracted and documented"]
@@ -39,6 +37,8 @@ kanban
     Sanity Studio route["Sanity Studio embedded at /studio"]
     Content seed["Sanity seeded: 4 solutions, 3 testimonials, 3 FAQs, site settings"]
     CMS wiring["All pages fetch content from Sanity CMS"]
+    Visual polish hp["Homepage visual polish: gradient hero, icons, mobile menu, card interactions"]
+    Visual polish sol["Solution page visual polish: branded components, comparison table, FAQ accordion"]
 ```
 
 ## Task Details
@@ -73,13 +73,13 @@ kanban
 | Sanity content seeded (4 solutions, 3 testimonials, 3 FAQs, site settings) | Done |
 | All pages wired to Sanity CMS (GROQ queries, Portable Text rendering) | Done |
 
-### Phase 2.5: Visual Polish — NEXT
+### Phase 2.5: Visual Polish — COMPLETE
 
 | Task | Status |
 |---|---|
-| Homepage to production quality (typography, spacing, imagery, brand feel) | Todo |
-| DMP solution page to production quality | Todo |
-| Remaining pages visual pass | Todo |
+| Homepage to production quality (typography, spacing, imagery, brand feel) | Done |
+| DMP solution page to production quality | Done |
+| All shared components polished (Header, Footer, TrustBar, cards, tables, accordion) | Done |
 
 ### Phase 3: Content Migration
 
