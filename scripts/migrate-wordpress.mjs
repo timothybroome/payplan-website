@@ -398,8 +398,7 @@ async function commitToSanity(documents) {
     return;
   }
 
-  // Batch in groups of 50 to avoid API limits
-  const batchSize = 50;
+  const batchSize = 10;
   let committed = 0;
 
   for (let i = 0; i < documents.length; i += batchSize) {

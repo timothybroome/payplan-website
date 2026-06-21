@@ -94,10 +94,11 @@ kanban
 | Structured data — BreadcrumbSchema + FaqSchema components | Done |
 | Sitemap (auto-generated from Sanity content) | Done |
 | robots.txt (blocks /studio, /your-plan, /api/) | Done |
+| WordPress migration script (HTML → Portable Text, batched upsert) | Done |
+| Debt info articles migrated (131 articles from WordPress) | Done |
+| Solution pages migrated (10 additional solutions from WordPress) | Done |
+| Blog posts migrated (717 posts from WordPress) | Done |
 | SEO audit (export rankings, Core Web Vitals baseline) | Todo |
-| Solution content (migrate WordPress content into Sanity) | Todo |
-| Debt info articles (migrate ~90 articles into Sanity) | Todo |
-| Blog posts (migrate news articles into Sanity) | Todo |
 | About/contact pages (migrate company content) | Todo |
 
 ### Phase 4: Integration
