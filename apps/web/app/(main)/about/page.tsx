@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { TrustBar } from '@components/layout/TrustBar';
 import { TestimonialBlock } from '@components/content/TestimonialBlock';
+import { getSiteSettings, getTestimonials } from '@/sanity/queries';
 
 export const metadata: Metadata = {
   title: 'About PayPlan',
@@ -33,7 +34,12 @@ const protections = [
   { title: 'Real, trained people', description: 'Our advisers are qualified debt counsellors, not salespeople.' },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [settings, testimonials] = await Promise.all([
+    getSiteSettings(),
+    getTestimonials(),
+  ]);
+
   return (
     <>
       <section className="bg-pp-deep text-pp-cream py-20 md:py-28">
@@ -44,7 +50,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <TrustBar />
+      <TrustBar settings={settings} />
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[var(--container-readable)] px-6">
@@ -77,7 +83,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <TestimonialBlock />
+      <TestimonialBlock testimonials={testimonials} />
 
       <section className="bg-pp-deep py-16 md:py-20">
         <div className="mx-auto max-w-[var(--container-readable)] px-6 text-center">

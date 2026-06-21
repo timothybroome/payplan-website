@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { HeroPermission } from '@components/hero/HeroPermission';
 import { TrustBar } from '@components/layout/TrustBar';
 import { SolutionGrid } from '@components/content/SolutionGrid';
+import { getSiteSettings, getSolutions } from '@/sanity/queries';
 
 export const metadata: Metadata = {
   title: 'Where Do I Start?',
@@ -34,11 +35,16 @@ const tools = [
   { title: 'Bill savings', description: 'Find ways to reduce your regular outgoings.', href: '#' },
 ];
 
-export default function WhereDoIStartPage() {
+export default async function WhereDoIStartPage() {
+  const [settings, solutions] = await Promise.all([
+    getSiteSettings(),
+    getSolutions(),
+  ]);
+
   return (
     <>
       <HeroPermission />
-      <TrustBar />
+      <TrustBar settings={settings} />
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[var(--container-readable)] px-6">
@@ -82,7 +88,7 @@ export default function WhereDoIStartPage() {
         </div>
       </section>
 
-      <SolutionGrid />
+      <SolutionGrid solutions={solutions} />
     </>
   );
 }

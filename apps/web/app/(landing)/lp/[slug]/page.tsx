@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { TrustBar } from '@components/layout/TrustBar';
 import { TestimonialBlock } from '@components/content/TestimonialBlock';
+import { getTestimonials } from '@/sanity/queries';
 
 export const metadata: Metadata = {
   robots: 'noindex, nofollow',
@@ -22,6 +23,7 @@ export default async function PaidMediaLandingPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const testimonials = await getTestimonials();
   return (
     <>
       <section className="bg-pp-deep text-pp-cream py-16 md:py-24">
@@ -113,7 +115,7 @@ export default async function PaidMediaLandingPage({
         </div>
       </section>
 
-      <TestimonialBlock />
+      <TestimonialBlock testimonials={testimonials} />
 
       <section className="bg-pp-deep py-12">
         <div className="mx-auto max-w-[var(--container-readable)] px-6 text-center">

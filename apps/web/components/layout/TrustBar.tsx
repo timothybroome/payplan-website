@@ -1,12 +1,20 @@
-const trustItems = [
-  { label: 'FCA regulated', value: null },
-  { label: 'Always free', value: null },
-  { label: 'People helped', value: '3m+' },
-  { label: 'Trustpilot', value: '4.5/5' },
-  { label: 'Years helping', value: '30+' },
-];
+interface TrustBarProps {
+  settings?: {
+    trustpilotRating?: string;
+    peopleHelped?: string;
+    yearsOperating?: string;
+  };
+}
 
-export function TrustBar() {
+export function TrustBar({ settings }: TrustBarProps = {}) {
+  const trustItems = [
+    { label: 'FCA regulated', value: null },
+    { label: 'Always free', value: null },
+    { label: 'People helped', value: settings?.peopleHelped ?? '3m+' },
+    { label: 'Trustpilot', value: settings?.trustpilotRating ?? '4.5/5' },
+    { label: 'Years helping', value: settings?.yearsOperating ?? '30+' },
+  ];
+
   return (
     <section className="bg-pp-cream-warm border-y border-pp-line">
       <div className="mx-auto max-w-[var(--container-readable)] px-6 py-4">

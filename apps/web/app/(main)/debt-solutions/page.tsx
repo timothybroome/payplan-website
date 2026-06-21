@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { TrustBar } from '@components/layout/TrustBar';
 import { SolutionGrid } from '@components/content/SolutionGrid';
 import { ThreeStepProcess } from '@components/content/ThreeStepProcess';
+import { getSiteSettings, getSolutions } from '@/sanity/queries';
 
 export const metadata: Metadata = {
   title: 'Ways to Clear Your Debt',
@@ -9,7 +10,12 @@ export const metadata: Metadata = {
     'Compare free debt solutions — DMP, IVA, DRO, bankruptcy, Trust Deed and more. Find the right option for your situation.',
 };
 
-export default function DebtSolutionsPage() {
+export default async function DebtSolutionsPage() {
+  const [settings, solutions] = await Promise.all([
+    getSiteSettings(),
+    getSolutions(),
+  ]);
+
   return (
     <>
       <section className="bg-pp-deep text-pp-cream py-20 md:py-28">
@@ -24,8 +30,8 @@ export default function DebtSolutionsPage() {
           </p>
         </div>
       </section>
-      <TrustBar />
-      <SolutionGrid />
+      <TrustBar settings={settings} />
+      <SolutionGrid solutions={solutions} />
       <ThreeStepProcess />
     </>
   );

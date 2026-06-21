@@ -1,14 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+import { PortableText, type PortableTextBlock } from '@portabletext/react';
 
 interface FaqItem {
   question: string;
-  answer: string;
+  answer: string | PortableTextBlock[];
 }
 
 export function FaqAccordion({ items, title = 'Common questions' }: { items: FaqItem[]; title?: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  if (!items?.length) return null;
 
   return (
     <section className="py-16 md:py-24">
@@ -30,7 +33,11 @@ export function FaqAccordion({ items, title = 'Common questions' }: { items: Faq
               </dt>
               {openIndex === i && (
                 <dd className="mt-3 text-sm text-pp-ink/70 leading-relaxed max-w-3xl">
-                  {item.answer}
+                  {typeof item.answer === 'string' ? (
+                    item.answer
+                  ) : (
+                    <PortableText value={item.answer} />
+                  )}
                 </dd>
               )}
             </div>

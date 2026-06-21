@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { TrustBar } from '@components/layout/TrustBar';
 import { TestimonialBlock } from '@components/content/TestimonialBlock';
 import { FaqAccordion } from '@components/content/FaqAccordion';
+import { getTestimonials } from '@/sanity/queries';
 
 const partnerFaqs = [
   {
@@ -42,6 +43,7 @@ export default async function PartnerLandingPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const testimonials = await getTestimonials();
   const partnerName = slug
     .split('-')
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
@@ -154,7 +156,7 @@ export default async function PartnerLandingPage({
       </section>
 
       <FaqAccordion items={partnerFaqs} />
-      <TestimonialBlock />
+      <TestimonialBlock testimonials={testimonials} />
 
       <section className="bg-pp-deep py-12">
         <div className="mx-auto max-w-[var(--container-readable)] px-6 text-center">
