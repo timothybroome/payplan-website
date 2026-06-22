@@ -6,13 +6,10 @@ title: payplan-website
 ---
 kanban
   Backlog
-    Phase 3 Content["Phase 3: Content Migration"]
-    Phase 4 Integration["Phase 4: Integration"]
-    Phase 5 Guide["Phase 5: Marketing Guide"]
     Phase 6 Launch["Phase 6: QA and Launch"]
   Todo
+    Phase 3 Remaining["Phase 3: SEO audit + about/contact migration"]
   In Progress
-    Phase 3 Content["Phase 3: Content Migration"]
   Review
   Done
     Source materials["Brand framework, wireframes, current site content extracted and documented"]
@@ -39,6 +36,8 @@ kanban
     CMS wiring["All pages fetch content from Sanity CMS"]
     Visual polish hp["Homepage visual polish: gradient hero, icons, mobile menu, card interactions"]
     Visual polish sol["Solution page visual polish: branded components, comparison table, FAQ accordion"]
+    Phase 4 Integration["Phase 4: GTM, Intercom, Trustpilot, referral tracking, micro-frontend"]
+    Phase 5 Guide["Phase 5: Marketing docs site (payplan-website-docs)"]
 ```
 
 ## Task Details
@@ -101,24 +100,28 @@ kanban
 | SEO audit (export rankings, Core Web Vitals baseline) | Todo |
 | About/contact pages (migrate company content) | Todo |
 
-### Phase 4: Integration
+### Phase 4: Integration — COMPLETE
 
 | Task | Status |
 |---|---|
-| Intercom (load, referral ID handoff, Live Chat trigger) | Todo |
-| GTM/GA (dataLayer, event tracking continuity) | Todo |
-| Trustpilot widget integration | Todo |
-| Module Federation (setup for squad micro-frontends) | Todo |
-| Referral ID system (middleware, cookies, dataLayer push) | Todo |
+| GTM/GA (GoogleTagManager component, dataLayer events, virtual page views) | Done |
+| Intercom (widget load, LiveChatButton, referral handoff to chat) | Done |
+| Trustpilot widget (TrustpilotWidget component on homepage) | Done |
+| Module Federation (MicroFrontend component, Your Plan page wired) | Done |
+| Referral ID system (middleware captures ref/utm_source, 30-day cookie, dataLayer push) | Done |
+| .env.example (all integration env vars documented) | Done |
 
-### Phase 5: Marketing Guide
+### Phase 5: Marketing Guide — COMPLETE
 
 | Task | Status |
 |---|---|
-| VitePress setup (docs/ site with brand framework nav) | Todo |
-| Content update guide (creating pages, editing, publishing) | Todo |
-| Template documentation (what each template does) | Todo |
-| Sanity Studio guide (UI walkthrough for marketing team) | Todo |
+| VitePress setup (standalone repo, GitHub Actions, PayPlan brand theme) | Done |
+| Content update guide (Sanity Studio, block editor, articles, blog posts, solutions) | Done |
+| Template documentation (all page templates with section breakdowns) | Done |
+| Brand reference (colours, typography, voice, components) | Done |
+| Git workflow guide (setup, making changes, environments) | Done |
+| SEO strategy reference (redirects, sitemap, structured data, analytics) | Done |
+| Integrations reference (GTM, Intercom, Trustpilot, referral tracking) | Done |
 
 ### Phase 6: QA and Launch
 
