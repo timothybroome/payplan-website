@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { MicroFrontend } from '@components/integrations';
 
 export const metadata: Metadata = {
   title: 'Your Plan',
   description: 'View and manage your debt plan with PayPlan.',
 };
 
-export default function YourPlanPage() {
+const CORE_MFE_URL = process.env.NEXT_PUBLIC_CORE_MFE_URL;
+
+function YourPlanFallback() {
   return (
     <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[var(--container-readable)] px-6 text-center">
@@ -14,10 +17,6 @@ export default function YourPlanPage() {
         <p className="pp-lede mt-6 text-pp-ink/70 max-w-xl mx-auto">
           This area will show your plan progress, payments and documents once
           the client dashboard is available.
-        </p>
-        <p className="mt-4 text-sm text-pp-ink/50">
-          This page will load the client area micro-frontend from the Core
-          squad when ready.
         </p>
         <Link
           href="/where-do-i-start"
@@ -27,5 +26,15 @@ export default function YourPlanPage() {
         </Link>
       </div>
     </section>
+  );
+}
+
+export default function YourPlanPage() {
+  return (
+    <MicroFrontend
+      name="your-plan"
+      remoteUrl={CORE_MFE_URL}
+      fallback={<YourPlanFallback />}
+    />
   );
 }

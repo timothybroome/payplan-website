@@ -1,6 +1,13 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { OrganizationSchema } from '@components/StructuredData';
+import {
+  GoogleTagManager,
+  DataLayerEvents,
+  Intercom,
+  TrustpilotScript,
+  ReferralTracker,
+} from '@components/integrations';
 import './globals.css';
 
 const inter = Inter({
@@ -26,8 +33,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
+        <GoogleTagManager />
         <OrganizationSchema />
         {children}
+        <DataLayerEvents />
+        <ReferralTracker />
+        <Intercom />
+        <TrustpilotScript />
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { LiveChatButton } from '@components/integrations/LiveChatButton';
 
 export function HeroPermission() {
   return (
@@ -24,6 +25,7 @@ export function HeroPermission() {
           >
             Talk to someone
           </a>
+          <LiveChatButton />
         </div>
       </div>
     </section>
