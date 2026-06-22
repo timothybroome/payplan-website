@@ -1,6 +1,7 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 import { join } from 'path';
 import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
 
 const stubs = join(__dirname, '../stubs');
 
@@ -11,6 +12,7 @@ const config: StorybookConfig = {
   viteFinal: async (config) => {
     config.plugins = config.plugins || [];
     config.plugins.push(tailwindcss());
+    config.plugins.push(react());
 
     config.resolve = config.resolve || {};
     config.resolve.alias = {
