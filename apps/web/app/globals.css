@@ -36,7 +36,7 @@ body {
 
 /* Brand type classes */
 .pp-h-display {
-  font-size: clamp(36px, 10vw, 140px);
+  font-size: clamp(56px, 10vw, 140px);
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.04em;
