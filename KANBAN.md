@@ -11,6 +11,7 @@ kanban
     Phase 3 Remaining["Phase 3: SEO audit + about/contact migration"]
     Incomplete pages["Paid-media Sanity schema, Life After Debt tools, Check Your Options submission"]
     Integration credentials["GTM, Intercom, Trustpilot IDs needed to activate"]
+    Storybook["Component gallery: Storybook for marketing + developer component reference"]
   In Progress
   Review
   Done
@@ -104,7 +105,7 @@ kanban
 | Task | Status | Notes |
 |---|---|---|
 | GTM/GA (GoogleTagManager component, dataLayer events, virtual page views) | Built — needs ID | Set `NEXT_PUBLIC_GTM_ID` to activate |
-| Intercom (widget load, LiveChatButton, referral handoff to chat) | Built — needs ID | Set `NEXT_PUBLIC_INTERCOM_APP_ID` to activate |
+| Intercom (widget load, LiveChatButton, referral handoff to chat) | Built — needs config | App ID set, EU endpoint configured. Domain `payplan.tjb.app` must be added to trusted domains in Intercom Settings → Installation → Web |
 | Trustpilot widget (TrustpilotWidget component on homepage) | Built — needs ID | Set `NEXT_PUBLIC_TRUSTPILOT_BUSINESS_UNIT_ID` to activate |
 | Module Federation (MicroFrontend component, Your Plan page wired) | Built — awaiting Core | Set `NEXT_PUBLIC_CORE_MFE_URL` when available |
 | Referral ID system (middleware captures ref/utm_source, 30-day cookie, dataLayer push) | Done | Active now, no credentials needed |
@@ -130,6 +131,55 @@ kanban
 | Paid-media landing (`/lp/[slug]`) | Single hardcoded DRO example renders | No Sanity schema — can't create new campaigns without code changes |
 | Check Your Options (`/check-your-options`) | 4-step assessment UI, solution recommendations | Form submission does nothing — no backend, no Intercom trigger, no dataLayer event |
 | Life After Debt (`/life-after-debt`) | Page template, confidence areas | Tool links go to `#`, newsletter signup is a non-functional form |
+
+### Storybook — Component Gallery
+
+**Purpose:** Give the marketing team a visual catalogue of reusable page sections (like WordPress blocks) and give future developers a living component reference. The marketing team is coming from PHP/WordPress where they could browse and compose blocks — this provides parity without requiring them to edit React code.
+
+**Setup:**
+
+| Task | Status | Notes |
+|---|---|---|
+| Scaffold `apps/storybook` in monorepo | Todo | Storybook 8, React + Vite, `@storybook/nextjs` framework |
+| Configure Tailwind v4 + design tokens | Todo | Import `@payplan/design-tokens` preset so stories render with real brand styling |
+| Deploy to GitHub Pages or Coolify | Todo | Separate from main site — e.g. `storybook.tjb.app` or GH Pages |
+| Add link from docs site | Todo | Card on docs landing page + sidebar entry |
+
+**Stories to write — page sections (priority):**
+
+These are the "blocks" the marketing team should see. Each story should show the component with realistic PayPlan content, not lorem ipsum.
+
+| Component | File | What it shows |
+|---|---|---|
+| HeroHome | `components/hero/HeroHome.tsx` | Homepage hero with gradient, headline, CTAs |
+| HeroSolution | `components/hero/HeroSolution.tsx` | Solution page hero with breadcrumb |
+| HeroPermission | `components/hero/HeroPermission.tsx` | "Where Do I Start" permission-based hero |
+| TrustBar | `components/layout/TrustBar.tsx` | FCA regulated, Trustpilot, people helped badges |
+| SegmentationGrid | `components/content/SegmentationGrid.tsx` | "What kind of debt?" audience cards |
+| ThreeStepProcess | `components/content/ThreeStepProcess.tsx` | Three-step "how it works" |
+| SolutionGrid | `components/content/SolutionGrid.tsx` | Grid of solution cards |
+| TestimonialBlock | `components/content/TestimonialBlock.tsx` | Customer testimonials carousel/grid |
+| FaqAccordion | `components/content/FaqAccordion.tsx` | Expandable FAQ section |
+| AtAGlance | `components/content/AtAGlance.tsx` | Solution "at a glance" key facts |
+| EligibilityCheck | `components/content/EligibilityCheck.tsx` | "May suit you if" / "Things worth knowing" |
+| ComparisonTable | `components/content/ComparisonTable.tsx` | Solution comparison table |
+| LiveChatButton | `components/integrations/LiveChatButton.tsx` | Intercom chat CTA button |
+| TrustpilotWidget | `components/integrations/Trustpilot.tsx` | Trustpilot review widget |
+
+**Stories to write — layout:**
+
+| Component | File | What it shows |
+|---|---|---|
+| Header | `components/layout/Header.tsx` | Main site header with nav, mobile menu |
+| Footer | `components/layout/Footer.tsx` | Footer with FCA text, links |
+
+**Implementation notes:**
+
+- Use `@storybook/nextjs` framework to handle Next.js `Image`, `Link`, `useRouter` automatically
+- Stories need mock data — create a `stories/fixtures/` directory with realistic Sanity-shaped objects (solutions, testimonials, FAQs) so stories don't depend on a live CMS connection
+- Group stories by category in sidebar: "Heroes", "Content Sections", "Layout", "Integrations"
+- Add a welcome/intro page explaining what the gallery is for (aimed at marketing team, not developers)
+- Components that call Sanity (like pages) are NOT in scope — only presentational components that accept props
 
 ### Phase 6: QA and Launch
 
