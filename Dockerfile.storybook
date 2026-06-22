@@ -1,0 +1,24 @@
+FROM node:22-alpine AS base
+
+# --- Dependencies ---
+FROM base AS deps
+WORKDIR /app
+COPY package.json package-lock.json turbo.json ./
+COPY apps/storybook/package.json ./apps/storybook/package.json
+COPY apps/web/package.json ./apps/web/package.json
+COPY apps/studio/package.json ./apps/studio/package.json
+COPY packages/design-tokens/package.json ./packages/design-tokens/package.json
+RUN npm ci
+
+# --- Build ---
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npx turbo build --filter=@payplan/storybook
+
+# --- Serve ---
+FROM nginx:alpine AS runner
+COPY --from=builder /app/apps/storybook/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
