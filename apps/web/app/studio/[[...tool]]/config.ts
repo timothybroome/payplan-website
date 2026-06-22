@@ -82,6 +82,24 @@ const article = defineType({
   preview: { select: { title: 'title', subtitle: 'category' } },
 });
 
+const partnerPage = defineType({
+  name: 'partnerPage',
+  title: 'Partner Landing Page',
+  type: 'document',
+  fields: [
+    defineField({ name: 'partnerName', title: 'Partner Name', type: 'string', validation: (r) => r.required() }),
+    defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'partnerName', maxLength: 96 }, validation: (r) => r.required() }),
+    defineField({ name: 'logoUrl', title: 'Logo Path', type: 'string', description: 'Path to logo SVG in /partners/ (e.g. natwest.svg)' }),
+    defineField({ name: 'brandColour', title: 'Brand Colour (hex)', type: 'string', description: 'Partner brand colour for accents (e.g. #42145F)' }),
+    defineField({ name: 'headline', title: 'Headline', type: 'string', initialValue: 'Free, confidential debt help' }),
+    defineField({ name: 'intro', title: 'Intro Text', type: 'text', rows: 3 }),
+    defineField({ name: 'faqs', title: 'FAQs', type: 'array', of: [{ type: 'object', fields: [defineField({ name: 'question', type: 'string', title: 'Question' }), defineField({ name: 'answer', type: 'text', title: 'Answer' })] }] }),
+    defineField({ name: 'seoTitle', title: 'SEO Title', type: 'string' }),
+    defineField({ name: 'seoDescription', title: 'SEO Description', type: 'text', rows: 3 }),
+  ],
+  preview: { select: { title: 'partnerName' } },
+});
+
 const blogPost = defineType({
   name: 'blogPost',
   title: 'Blog Post',
@@ -106,6 +124,6 @@ export default defineConfig({
   basePath: '/studio',
   plugins: [structureTool()],
   schema: {
-    types: [siteSettings, solution, testimonial, faqItem, article, blogPost],
+    types: [siteSettings, solution, testimonial, faqItem, article, blogPost, partnerPage],
   },
 });

@@ -1,31 +1,26 @@
-import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import { TrustBar } from '@components/layout/TrustBar';
 import { TestimonialBlock } from '@components/content/TestimonialBlock';
 import { FaqAccordion } from '@components/content/FaqAccordion';
-import { getTestimonials } from '@/sanity/queries';
+import { TrustpilotWidget } from '@components/integrations';
+import { getPartnerPage, getAllPartnerSlugs, getTestimonials, getSiteSettings } from '@/sanity/queries';
+import { PartnerForm } from './PartnerForm';
 
-const partnerFaqs = [
-  {
-    question: 'Will my bank see what I tell you?',
-    answer:
-      'No. Everything you share with us is completely confidential. We only contact your creditors once you have a plan in place, and only to arrange reduced payments.',
-  },
-  {
-    question: 'Do I have to stop using my account?',
-    answer:
-      "Not necessarily. It depends on the solution you choose. We'll explain exactly what's involved before you commit to anything.",
-  },
-  {
-    question: 'Is this really free?',
-    answer:
-      'Yes. PayPlan is funded by creditors, not customers. You will never pay a fee for our advice or for setting up a debt plan.',
-  },
-  {
-    question: "What if a plan isn't right for me?",
-    answer:
-      "That's fine. We'll still give you advice on other options available to you. There's no obligation to take up any solution.",
-  },
-];
+export async function generateStaticParams() {
+  const slugs = await getAllPartnerSlugs();
+  return (slugs || []).map((slug: string) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const partner = await getPartnerPage(slug);
+  if (!partner) return {};
+  return {
+    title: partner.seoTitle || `Free debt advice — ${partner.partnerName} & PayPlan`,
+    description: partner.seoDescription || partner.intro,
+  };
+}
 
 const steps = [
   { title: 'Get in touch', description: 'Share a few details so we can understand your situation.' },
@@ -33,97 +28,84 @@ const steps = [
   { title: 'Move forward', description: "Choose the option that feels right. We handle everything from there." },
 ];
 
-export function generateStaticParams() {
-  return [{ slug: 'example-partner' }];
-}
-
 export default async function PartnerLandingPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const testimonials = await getTestimonials();
-  const partnerName = slug
-    .split('-')
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ');
+  const [partner, testimonials, settings] = await Promise.all([
+    getPartnerPage(slug),
+    getTestimonials(),
+    getSiteSettings(),
+  ]);
+
+  if (!partner) notFound();
+
+  const accentStyle = partner.brandColour
+    ? { '--partner-accent': partner.brandColour } as React.CSSProperties
+    : {};
 
   return (
     <>
-      <section className="bg-pp-deep text-pp-cream py-16 md:py-24">
+      {/* Co-branded header */}
+      <div className="border-b border-pp-line bg-pp-cream">
+        <div className="mx-auto flex max-w-[var(--container-readable)] items-center justify-between px-6 py-4">
+          <div className="flex items-center gap-4">
+            <span className="text-pp-deep font-semibold text-xl tracking-tight">PayPlan</span>
+            <span className="text-pp-line text-lg font-light">×</span>
+            {partner.logoUrl ? (
+              <Image
+                src={`/partners/${partner.logoUrl}`}
+                alt={partner.partnerName}
+                width={120}
+                height={32}
+                className="h-8 w-auto"
+              />
+            ) : (
+              <span className="text-lg font-semibold" style={{ color: partner.brandColour || 'var(--color-pp-deep)' }}>
+                {partner.partnerName}
+              </span>
+            )}
+          </div>
+          <a
+            href="tel:08003161833"
+            className="text-sm text-pp-deep hover:underline"
+          >
+            0800 316 1833
+          </a>
+        </div>
+      </div>
+
+      {/* Hero */}
+      <section className="bg-pp-deep text-pp-cream py-16 md:py-24" style={accentStyle}>
         <div className="mx-auto max-w-[var(--container-readable)] px-6">
           <p className="pp-h-tag text-pp-line mb-4">
-            In partnership with {partnerName}
+            In partnership with {partner.partnerName}
           </p>
           <h1 className="pp-h-display max-w-3xl">
-            Free, confidential debt help
+            {partner.headline || 'Free, confidential debt help'}
           </h1>
           <p className="pp-lede mt-6 max-w-2xl text-pp-cream/90">
-            {partnerName} has chosen PayPlan to offer you free, expert debt
-            advice. No fees, no judgement, completely confidential.
+            {partner.intro ||
+              `${partner.partnerName} has chosen PayPlan to offer you free, expert debt advice. No fees, no judgement, completely confidential.`}
           </p>
         </div>
       </section>
 
+      {/* Contact form */}
       <section className="py-12 md:py-16">
         <div className="mx-auto max-w-xl px-6">
           <h2 className="pp-h-sub text-pp-deep text-center">
             See how we can help
           </h2>
-          <form className="mt-8 space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-pp-ink mb-2">
-                How much do you owe in total?
-              </label>
-              <input
-                type="range"
-                min="0"
-                max="100000"
-                step="1000"
-                defaultValue="15000"
-                className="w-full accent-pp-accent"
-              />
-              <div className="flex justify-between text-xs text-pp-ink/50 mt-1">
-                <span>£0</span>
-                <span>£100,000+</span>
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-pp-ink mb-2">
-                How would you like to get help?
-              </label>
-              <div className="space-y-2">
-                {['Chat online now', 'Call me back', 'WhatsApp'].map(
-                  (option) => (
-                    <label
-                      key={option}
-                      className="flex items-center gap-3 rounded-pp border border-pp-line p-4 cursor-pointer hover:border-pp-accent transition-colors"
-                    >
-                      <input
-                        type="radio"
-                        name="contact"
-                        value={option}
-                        className="accent-pp-accent"
-                      />
-                      <span className="text-sm text-pp-ink">{option}</span>
-                    </label>
-                  ),
-                )}
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="w-full rounded-pp bg-pp-accent px-8 py-4 font-medium text-pp-cream hover:opacity-90 transition-opacity"
-            >
-              Get free advice
-            </button>
-          </form>
+          <PartnerForm partnerSlug={slug} />
         </div>
       </section>
 
-      <TrustBar />
+      <TrustBar settings={settings} />
 
+      {/* How can it be free */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[var(--container-readable)] px-6">
           <h2 className="pp-h-section text-pp-deep">How can it be free?</h2>
@@ -134,6 +116,7 @@ export default async function PartnerLandingPage({
         </div>
       </section>
 
+      {/* Steps */}
       <section className="bg-pp-cream-warm py-16 md:py-24">
         <div className="mx-auto max-w-[var(--container-readable)] px-6">
           <h2 className="pp-h-section text-pp-deep">
@@ -155,9 +138,21 @@ export default async function PartnerLandingPage({
         </div>
       </section>
 
-      <FaqAccordion items={partnerFaqs} />
+      {/* FAQs */}
+      {partner.faqs?.length > 0 && (
+        <FaqAccordion items={partner.faqs} />
+      )}
+
+      {/* Trustpilot */}
+      <section className="bg-pp-cream-warm py-12">
+        <div className="mx-auto max-w-[var(--container-readable)] px-6">
+          <TrustpilotWidget theme="light" />
+        </div>
+      </section>
+
       <TestimonialBlock testimonials={testimonials} />
 
+      {/* Bottom CTA */}
       <section className="bg-pp-deep py-12">
         <div className="mx-auto max-w-[var(--container-readable)] px-6 text-center">
           <p className="text-pp-cream/80 text-sm">

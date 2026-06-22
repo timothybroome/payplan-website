@@ -26,6 +26,18 @@ export default async function PaidMediaLandingPage({
   const testimonials = await getTestimonials();
   return (
     <>
+      <header className="border-b border-pp-line bg-pp-cream">
+        <div className="mx-auto flex max-w-[var(--container-readable)] items-center justify-between px-6 py-4">
+          <span className="text-pp-deep font-semibold text-xl">PayPlan</span>
+          <a
+            href="tel:08003161833"
+            className="text-sm text-pp-deep hover:underline"
+          >
+            0800 316 1833
+          </a>
+        </div>
+      </header>
+
       <section className="bg-pp-deep text-pp-cream py-16 md:py-24">
         <div className="mx-auto max-w-[var(--container-readable)] px-6">
           <h1 className="pp-h-display max-w-3xl">

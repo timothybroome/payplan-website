@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="none">
+  <!-- NatWest three-chevron cube mark -->
+  <g transform="translate(0,4)">
+    <!-- Red cube faces -->
+    <polygon points="20,0 40,10 20,20 0,10" fill="#E3120B"/>
+    <polygon points="20,20 40,10 40,30 20,40" fill="#B80D09"/>
+    <polygon points="0,10 20,20 20,40 0,30" fill="#9A0A07"/>
+  </g>
+  <!-- NatWest wordmark -->
+  <g fill="#42145F">
+    <text x="52" y="33" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" letter-spacing="-0.5">NatWest</text>
+  </g>
+</svg>

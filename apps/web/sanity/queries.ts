@@ -96,3 +96,21 @@ export async function getAllBlogSlugs() {
     `*[_type == "blogPost"].slug.current`,
   );
 }
+
+export async function getPartnerPage(slug: string) {
+  return sanityClient.fetch(
+    `*[_type == "partnerPage" && slug.current == $slug][0] {
+      _id, partnerName, logoUrl, brandColour,
+      headline, intro, faqs,
+      "slug": slug.current,
+      seoTitle, seoDescription
+    }`,
+    { slug },
+  );
+}
+
+export async function getAllPartnerSlugs() {
+  return sanityClient.fetch(
+    `*[_type == "partnerPage"].slug.current`,
+  );
+}
