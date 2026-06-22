@@ -9,6 +9,8 @@ kanban
     Phase 6 Launch["Phase 6: QA and Launch"]
   Todo
     Phase 3 Remaining["Phase 3: SEO audit + about/contact migration"]
+    Incomplete pages["Paid-media Sanity schema, Life After Debt tools, Check Your Options submission"]
+    Integration credentials["GTM, Intercom, Trustpilot IDs needed to activate"]
   In Progress
   Review
   Done
@@ -18,25 +20,22 @@ kanban
     Next.js scaffold["Next.js 15 App Router + TypeScript + Tailwind"]
     Design tokens package["@payplan/design-tokens: Tailwind preset + CSS vars + TS constants"]
     Sanity project setup["Sanity project + Studio initialisation"]
-    Core schemas["Sanity schemas: siteSettings, solution, testimonial, faqItem"]
+    Core schemas["Sanity schemas: siteSettings, solution, testimonial, faqItem, partnerPage"]
     Layout components["Header, Footer, TrustBar components"]
     Coolify deploy["Deploy to Coolify at payplan.tjb.app"]
     CI pipeline["Build on push, deploy main to Coolify"]
-    Homepage["Homepage: hero + segmentation + three-step + solutions + testimonials"]
+    Homepage["Homepage: hero + segmentation + three-step + solutions + testimonials + Trustpilot"]
     Solution page["Solution page: breadcrumb + at-a-glance + eligibility + comparison + FAQ"]
-    Where Do I Start["Where Do I Start: permission hero + reassurance + tools"]
+    Where Do I Start["Where Do I Start: permission hero + reassurance + live chat CTA"]
     About page["About: trust badges + how-can-it-be-free explainer"]
-    Partner landing["Partner landing: co-branded + form + FAQs (no nav)"]
-    Paid-media landing["Paid-media landing: form-first + noindex (no nav)"]
-    Self-serve assessment["Check Your Options: multi-step interactive assessment"]
-    Life After Debt["Life After Debt: wellbeing tools + newsletter"]
-    Your Plan placeholder["Your Plan: placeholder for Core squad micro-frontend"]
+    Partner landing["Partner landing: Sanity-driven, NatWest live, co-branded + form + referral tracking"]
+    Your Plan placeholder["Your Plan: MicroFrontend component, awaiting Core squad"]
     Sanity Studio route["Sanity Studio embedded at /studio"]
-    Content seed["Sanity seeded: 4 solutions, 3 testimonials, 3 FAQs, site settings"]
+    Content seed["Sanity seeded: solutions, testimonials, FAQs, site settings, NatWest partner"]
     CMS wiring["All pages fetch content from Sanity CMS"]
     Visual polish hp["Homepage visual polish: gradient hero, icons, mobile menu, card interactions"]
     Visual polish sol["Solution page visual polish: branded components, comparison table, FAQ accordion"]
-    Phase 4 Integration["Phase 4: GTM, Intercom, Trustpilot, referral tracking, micro-frontend"]
+    Phase 4 infra["Phase 4: integration components built (GTM, Intercom, Trustpilot, referral, MFE)"]
     Phase 5 Guide["Phase 5: Marketing docs site (payplan-website-docs)"]
 ```
 
@@ -55,21 +54,21 @@ kanban
 | Coolify deploy (payplan.tjb.app, Dockerfile, standalone output) | Done |
 | CI pipeline (auto-deploy on push to main) | Done |
 
-### Phase 2: Page Templates — COMPLETE
+### Phase 2: Page Templates
 
 | Task | Status |
 |---|---|
 | Homepage (HeroHome, TrustBar, SegmentationGrid, ThreeStepProcess, TestimonialBlock, SolutionGrid) | Done |
 | Solution page (HeroSolution, AtAGlance, EligibilityCheck, ComparisonTable, FaqAccordion) | Done |
-| Where Do I Start (HeroPermission, reassurance scenarios, tools) | Done |
+| Where Do I Start (HeroPermission, reassurance scenarios, live chat CTA) | Done |
 | About page (trust badges, "how can it be free", protections) | Done |
-| Partner landing page (co-branded header, form, partner FAQs, no nav) | Done |
-| Paid-media landing page (form-first, noindex, no nav) | Done |
-| Self-serve assessment (Check Your Options, 4-step interactive) | Done |
-| Life After Debt (wellbeing tools, confidence areas, newsletter) | Done |
-| Your Plan placeholder (for Core squad micro-frontend) | Done |
+| Partner landing page (Sanity schema, NatWest live, co-branded header, form, referral tracking) | Done |
+| Paid-media landing page (hardcoded DRO example only — no Sanity schema, can't create new pages without code) | Incomplete |
+| Self-serve assessment (Check Your Options — UI works, form submission goes nowhere) | Incomplete |
+| Life After Debt (template exists, tool links are `#` placeholders, newsletter form is dummy) | Incomplete |
+| Your Plan placeholder (MicroFrontend component wired, awaiting Core squad) | Done (blocked) |
 | Sanity Studio embedded at /studio | Done |
-| Sanity content seeded (4 solutions, 3 testimonials, 3 FAQs, site settings) | Done |
+| Sanity content seeded (4 solutions, 3 testimonials, 3 FAQs, site settings, NatWest partner) | Done |
 | All pages wired to Sanity CMS (GROQ queries, Portable Text rendering) | Done |
 
 ### Phase 2.5: Visual Polish — COMPLETE
@@ -100,16 +99,17 @@ kanban
 | SEO audit (export rankings, Core Web Vitals baseline) | Todo |
 | About/contact pages (migrate company content) | Todo |
 
-### Phase 4: Integration — COMPLETE
+### Phase 4: Integration
 
-| Task | Status |
-|---|---|
-| GTM/GA (GoogleTagManager component, dataLayer events, virtual page views) | Done |
-| Intercom (widget load, LiveChatButton, referral handoff to chat) | Done |
-| Trustpilot widget (TrustpilotWidget component on homepage) | Done |
-| Module Federation (MicroFrontend component, Your Plan page wired) | Done |
-| Referral ID system (middleware captures ref/utm_source, 30-day cookie, dataLayer push) | Done |
-| .env.example (all integration env vars documented) | Done |
+| Task | Status | Notes |
+|---|---|---|
+| GTM/GA (GoogleTagManager component, dataLayer events, virtual page views) | Built — needs ID | Set `NEXT_PUBLIC_GTM_ID` to activate |
+| Intercom (widget load, LiveChatButton, referral handoff to chat) | Built — needs ID | Set `NEXT_PUBLIC_INTERCOM_APP_ID` to activate |
+| Trustpilot widget (TrustpilotWidget component on homepage) | Built — needs ID | Set `NEXT_PUBLIC_TRUSTPILOT_BUSINESS_UNIT_ID` to activate |
+| Module Federation (MicroFrontend component, Your Plan page wired) | Built — awaiting Core | Set `NEXT_PUBLIC_CORE_MFE_URL` when available |
+| Referral ID system (middleware captures ref/utm_source, 30-day cookie, dataLayer push) | Done | Active now, no credentials needed |
+| Partner page referral + Intercom handoff | Done | Works end-to-end when Intercom ID is set |
+| .env.example (all integration env vars documented) | Done | |
 
 ### Phase 5: Marketing Guide — COMPLETE
 
@@ -122,6 +122,14 @@ kanban
 | Git workflow guide (setup, making changes, environments) | Done |
 | SEO strategy reference (redirects, sitemap, structured data, analytics) | Done |
 | Integrations reference (GTM, Intercom, Trustpilot, referral tracking) | Done |
+
+### Incomplete Pages — needs attention
+
+| Page | What works | What doesn't |
+|---|---|---|
+| Paid-media landing (`/lp/[slug]`) | Single hardcoded DRO example renders | No Sanity schema — can't create new campaigns without code changes |
+| Check Your Options (`/check-your-options`) | 4-step assessment UI, solution recommendations | Form submission does nothing — no backend, no Intercom trigger, no dataLayer event |
+| Life After Debt (`/life-after-debt`) | Page template, confidence areas | Tool links go to `#`, newsletter signup is a non-functional form |
 
 ### Phase 6: QA and Launch
 
