@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { PortableText, type PortableTextBlock } from '@portabletext/react';
+import { portableTextComponents } from './PortableTextComponents';
 
 interface FaqItem {
   question: string;
@@ -40,7 +41,7 @@ export function FaqAccordion({ items, title = 'Common questions' }: { items: Faq
                   {typeof item.answer === 'string' ? (
                     item.answer
                   ) : (
-                    <PortableText value={item.answer} />
+                    <PortableText value={item.answer} components={portableTextComponents} />
                   )}
                 </dd>
               )}

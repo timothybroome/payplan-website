@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { getArticle, getAllArticleSlugs } from '@/sanity/queries';
+import { portableTextComponents } from '@/components/content/PortableTextComponents';
 
 export async function generateStaticParams() {
   const slugs = await getAllArticleSlugs();
@@ -47,7 +48,7 @@ export default async function ArticlePage({
         <div className="mx-auto max-w-[740px] px-6">
           {article.body ? (
             <div className="pp-prose-body text-pp-ink/80 space-y-6 [&_h2]:pp-h-sub [&_h2]:text-pp-deep [&_h2]:mt-12 [&_h2]:mb-4 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:text-pp-deep [&_h3]:mt-8 [&_h3]:mb-3 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_a]:text-pp-accent [&_a]:underline">
-              <PortableText value={article.body} />
+              <PortableText value={article.body} components={portableTextComponents} />
             </div>
           ) : (
             <p className="text-pp-ink/60">Content coming soon.</p>

@@ -1,7 +1,32 @@
 'use client';
 
-import { defineConfig, defineType, defineField } from 'sanity';
+import { defineConfig, defineType, defineField, defineArrayMember } from 'sanity';
 import { structureTool } from 'sanity/structure';
+
+const richContent = [
+  defineArrayMember({ type: 'block' }),
+  defineArrayMember({
+    type: 'image',
+    options: { hotspot: true },
+    fields: [
+      defineField({ name: 'alt', title: 'Alt text', type: 'string', description: 'Describe the image for screen readers and SEO', validation: (r) => r.required() }),
+      defineField({ name: 'caption', title: 'Caption', type: 'string' }),
+    ],
+  }),
+  defineArrayMember({
+    type: 'object',
+    name: 'videoEmbed',
+    title: 'Video Embed',
+    fields: [
+      defineField({ name: 'url', title: 'Video URL', type: 'url', description: 'YouTube or Vimeo URL', validation: (r) => r.required() }),
+      defineField({ name: 'caption', title: 'Caption', type: 'string' }),
+    ],
+    preview: {
+      select: { url: 'url', caption: 'caption' },
+      prepare: ({ url, caption }) => ({ title: caption || 'Video', subtitle: url }),
+    },
+  }),
+];
 
 const siteSettings = defineType({
   name: 'siteSettings',
@@ -31,7 +56,7 @@ const solution = defineType({
     defineField({ name: 'region', title: 'Region', type: 'string', options: { list: [{ title: 'England & Wales', value: 'england-wales' }, { title: 'Scotland', value: 'scotland' }, { title: 'Both', value: 'both' }] }, initialValue: 'england-wales' }),
     defineField({ name: 'atAGlance', title: 'At a Glance', type: 'array', of: [{ type: 'object', fields: [defineField({ name: 'label', type: 'string', title: 'Label' }), defineField({ name: 'value', type: 'string', title: 'Value' })] }] }),
     defineField({ name: 'eligibility', title: 'Eligibility', type: 'object', fields: [defineField({ name: 'maySuit', title: 'May suit you if', type: 'array', of: [{ type: 'string' }] }), defineField({ name: 'worthKnowing', title: 'Things worth knowing', type: 'array', of: [{ type: 'string' }] })] }),
-    defineField({ name: 'body', title: 'Body Content', type: 'array', of: [{ type: 'block' }] }),
+    defineField({ name: 'body', title: 'Body Content', type: 'array', of: richContent }),
     defineField({ name: 'faqs', title: 'FAQs', type: 'array', of: [{ type: 'reference', to: [{ type: 'faqItem' }] }] }),
     defineField({ name: 'seoTitle', title: 'SEO Title', type: 'string' }),
     defineField({ name: 'seoDescription', title: 'SEO Description', type: 'text', rows: 3 }),
@@ -59,7 +84,7 @@ const faqItem = defineType({
   type: 'document',
   fields: [
     defineField({ name: 'question', title: 'Question', type: 'string', validation: (r) => r.required() }),
-    defineField({ name: 'answer', title: 'Answer', type: 'array', of: [{ type: 'block' }], validation: (r) => r.required() }),
+    defineField({ name: 'answer', title: 'Answer', type: 'array', of: richContent, validation: (r) => r.required() }),
     defineField({ name: 'solutions', title: 'Related Solutions', type: 'array', of: [{ type: 'reference', to: [{ type: 'solution' }] }] }),
   ],
   preview: { select: { title: 'question' } },
@@ -75,7 +100,7 @@ const article = defineType({
     defineField({ name: 'summary', title: 'Summary', type: 'text', rows: 3 }),
     defineField({ name: 'category', title: 'Category', type: 'string', options: { list: [{ title: 'Debt Info', value: 'debt-info' }, { title: 'Advice', value: 'advice' }, { title: 'Guides', value: 'guides' }] }, initialValue: 'debt-info' }),
     defineField({ name: 'relatedSolutions', title: 'Related Solutions', type: 'array', of: [{ type: 'reference', to: [{ type: 'solution' }] }] }),
-    defineField({ name: 'body', title: 'Body Content', type: 'array', of: [{ type: 'block' }] }),
+    defineField({ name: 'body', title: 'Body Content', type: 'array', of: richContent }),
     defineField({ name: 'seoTitle', title: 'SEO Title', type: 'string' }),
     defineField({ name: 'seoDescription', title: 'SEO Description', type: 'text', rows: 3 }),
   ],
@@ -109,7 +134,7 @@ const blogPost = defineType({
     defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title', maxLength: 96 }, validation: (r) => r.required() }),
     defineField({ name: 'publishedAt', title: 'Published Date', type: 'datetime', validation: (r) => r.required() }),
     defineField({ name: 'summary', title: 'Summary', type: 'text', rows: 3 }),
-    defineField({ name: 'body', title: 'Body Content', type: 'array', of: [{ type: 'block' }] }),
+    defineField({ name: 'body', title: 'Body Content', type: 'array', of: richContent }),
     defineField({ name: 'seoTitle', title: 'SEO Title', type: 'string' }),
     defineField({ name: 'seoDescription', title: 'SEO Description', type: 'text', rows: 3 }),
   ],
