@@ -7,7 +7,7 @@ export function HeroHome() {
       <div className="relative mx-auto max-w-[var(--container-readable)] px-6 py-24 md:py-36 lg:py-44">
         <p className="pp-h-tag text-pp-accent tracking-widest">Free, regulated debt advice</p>
         <h1 className="pp-h-display mt-4 max-w-4xl">
-          Take control of your debt, without&nbsp;judgement
+          Take control of your debt, without judgement
         </h1>
         <p className="pp-lede mt-8 max-w-2xl text-pp-cream/85">
           You don&apos;t have to have it all figured out to get in touch. Just
