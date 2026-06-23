@@ -114,7 +114,7 @@ const partnerPage = defineType({
   fields: [
     defineField({ name: 'partnerName', title: 'Partner Name', type: 'string', validation: (r) => r.required() }),
     defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'partnerName', maxLength: 96 }, validation: (r) => r.required() }),
-    defineField({ name: 'logoUrl', title: 'Logo Path', type: 'string', description: 'Path to logo SVG in /partners/ (e.g. natwest.svg)' }),
+    defineField({ name: 'logo', title: 'Partner Logo', type: 'image', description: 'Partner logo. SVG or PNG, at least 240px wide, transparent background.', options: { accept: 'image/svg+xml,image/png' } }),
     defineField({ name: 'brandColour', title: 'Brand Colour (hex)', type: 'string', description: 'Partner brand colour for accents (e.g. #42145F)' }),
     defineField({ name: 'headline', title: 'Headline', type: 'string', initialValue: 'Free, confidential debt help' }),
     defineField({ name: 'intro', title: 'Intro Text', type: 'text', rows: 3 }),

@@ -56,11 +56,12 @@ export default async function PartnerLandingPage({
             <span className="text-pp-line text-lg font-light">×</span>
             {partner.logoUrl ? (
               <Image
-                src={`/partners/${partner.logoUrl}`}
+                src={partner.logoUrl}
                 alt={partner.partnerName}
                 width={120}
                 height={32}
                 className="h-8 w-auto"
+                unoptimized
               />
             ) : (
               <span className="text-lg font-semibold" style={{ color: partner.brandColour || 'var(--color-pp-deep)' }}>

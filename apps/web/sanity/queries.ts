@@ -100,7 +100,8 @@ export async function getAllBlogSlugs() {
 export async function getPartnerPage(slug: string) {
   return sanityClient.fetch(
     `*[_type == "partnerPage" && slug.current == $slug][0] {
-      _id, partnerName, logoUrl, brandColour,
+      _id, partnerName, brandColour,
+      "logoUrl": logo.asset->url,
       headline, intro, faqs,
       "slug": slug.current,
       seoTitle, seoDescription
