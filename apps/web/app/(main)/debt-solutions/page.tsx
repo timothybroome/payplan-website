@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import type { Metadata } from 'next';
 import { TrustBar } from '@components/layout/TrustBar';
 import { SolutionGrid } from '@components/content/SolutionGrid';

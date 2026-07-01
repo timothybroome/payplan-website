@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import { HeroHome } from '@components/hero/HeroHome';
 import { TrustBar } from '@components/layout/TrustBar';
 import { SegmentationGrid } from '@components/content/SegmentationGrid';

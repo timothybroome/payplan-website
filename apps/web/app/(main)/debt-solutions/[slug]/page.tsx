@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import { notFound } from 'next/navigation';
 import { HeroSolution } from '@components/hero/HeroSolution';
 import { TrustBar } from '@components/layout/TrustBar';
