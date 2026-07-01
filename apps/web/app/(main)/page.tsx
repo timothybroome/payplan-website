@@ -1,4 +1,4 @@
-export const revalidate = 60;
+export const revalidate = 10;
 
 import { HeroHome } from '@components/hero/HeroHome';
 import { TrustBar } from '@components/layout/TrustBar';

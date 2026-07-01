@@ -7,7 +7,7 @@ import { TrustpilotWidget } from '@components/integrations';
 import { getPartnerPage, getAllPartnerSlugs, getTestimonials, getSiteSettings } from '@/sanity/queries';
 import { PartnerForm } from './PartnerForm';
 
-export const revalidate = 60;
+export const revalidate = 10;
 
 export async function generateStaticParams() {
   const slugs = await getAllPartnerSlugs();
